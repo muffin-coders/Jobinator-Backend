@@ -1,6 +1,6 @@
 package ch.wintihack.jobinator.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,8 +14,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer userId;
 
+    @JsonIgnore
     @EqualsAndHashCode.Exclude
-    @JsonIgnoreProperties("user")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserAnswer> userAnswers;
 }

@@ -1,6 +1,6 @@
 package ch.wintihack.jobinator.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.w3c.dom.Text;
@@ -19,12 +19,11 @@ public class Question {
     private String question;
 
     @EqualsAndHashCode.Exclude
-    @JsonIgnoreProperties("question")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
     private Set<Answer> answers;
 
+    @JsonIgnore
     @EqualsAndHashCode.Exclude
-    @JsonIgnoreProperties("question")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
     private Set<UserAnswer> userAnswers;
 }

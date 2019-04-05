@@ -1,6 +1,6 @@
 package ch.wintihack.jobinator.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,13 +17,14 @@ public class Answer {
 
     private String answerText;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties("answers")
+    @JsonIdentityReference(alwaysAsId=true)
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
+    @JsonIgnore
     @EqualsAndHashCode.Exclude
-    @JsonIgnoreProperties("answer")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "answer")
     private Set<UserAnswer> userAnswers;
 }
