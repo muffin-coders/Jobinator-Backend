@@ -4,6 +4,7 @@ import lombok.Data;
 import org.w3c.dom.Text;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -13,4 +14,5 @@ public class Question {
     private Integer questionId;
 
     private String question;
+
 }
