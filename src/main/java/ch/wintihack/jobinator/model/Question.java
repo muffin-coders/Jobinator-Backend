@@ -21,5 +21,10 @@ public class Question {
     @EqualsAndHashCode.Exclude
     @JsonIgnoreProperties("question")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
+    private Set<Answer> answers;
+
+    @EqualsAndHashCode.Exclude
+    @JsonIgnoreProperties("question")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
     private Set<UserAnswer> userAnswers;
 }

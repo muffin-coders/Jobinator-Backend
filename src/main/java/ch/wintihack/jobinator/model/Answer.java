@@ -17,6 +17,10 @@ public class Answer {
 
     private String answerText;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("answers")
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
 
     @EqualsAndHashCode.Exclude
     @JsonIgnoreProperties("answer")
