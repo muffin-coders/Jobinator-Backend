@@ -1,9 +1,9 @@
 package ch.wintihack.jobinator.persistence.service;
 
-import ch.wintihack.jobinator.model.Job;
-import ch.wintihack.jobinator.model.Question;
-import ch.wintihack.jobinator.persistence.repository.JobRepository;
-import ch.wintihack.jobinator.persistence.repository.QuestionRepository;
+import ch.wintihack.jobinator.model.JobDetail;
+import ch.wintihack.jobinator.model.JobPreview;
+import ch.wintihack.jobinator.persistence.repository.JobDetailRepository;
+import ch.wintihack.jobinator.persistence.repository.JobPreviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,15 @@ import org.springframework.stereotype.Service;
 public class JobService {
 
     @Autowired
-    private JobRepository jobRepository;
+    private JobPreviewRepository jobPreviewRepository;
+    @Autowired
+    private JobDetailRepository jobDetailRepository;
 
-    public Job getJobById(Integer id) throws Exception {
-        return jobRepository.findById(id).orElseThrow(Exception::new);
+    public JobPreview getJobPreviewById(Integer id) throws Exception {
+        return jobPreviewRepository.findById(id).orElseThrow(Exception::new);
+    }
+
+    public JobDetail getJobDetailById(Integer id) throws Exception {
+        return jobDetailRepository.findById(id).orElseThrow(Exception::new);
     }
 }

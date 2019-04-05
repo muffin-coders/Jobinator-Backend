@@ -1,21 +1,25 @@
 package ch.wintihack.jobinator.model;
 
-
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
-public class Job {
+public class JobDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer jobId;
+    private Integer jobPreviewId;
 
     private String jobTitle;
 
     private String jobText;
+
+    private String url;
+
+    private String tele;
+
+    @OneToOne
+    private JobPreview jobPreview;
 }

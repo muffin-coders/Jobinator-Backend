@@ -18,4 +18,9 @@ public class User {
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserAnswer> userAnswers;
+
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<JobRating> jobRatings;
 }
