@@ -27,4 +27,10 @@ public class UserAnswer {
     @JsonIgnoreProperties("userAnswer")
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
+
+    public UserAnswer(User user, Answer answer, Question question) {
+        this.user = user;
+        this.answer = answer;
+        this.question = question;
+    }
 }

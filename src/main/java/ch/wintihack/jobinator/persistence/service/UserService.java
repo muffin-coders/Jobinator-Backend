@@ -1,5 +1,6 @@
 package ch.wintihack.jobinator.persistence.service;
 
+import ch.wintihack.jobinator.model.Answer;
 import ch.wintihack.jobinator.model.User;
 import ch.wintihack.jobinator.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,5 +14,9 @@ public class UserService {
 
     public User createNewUser() {
         return userRepository.save(new User());
+    }
+
+    public User getUserById(Integer id) throws Exception {
+        return userRepository.findById(id).orElseThrow(Exception::new);
     }
 }
