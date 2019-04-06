@@ -17,14 +17,14 @@ public class JobRating {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_preview_id", nullable = false)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="jobPreviewId")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "jobPreviewId")
+    @JsonIdentityReference(alwaysAsId = true)
     private JobPreview jobPreview;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="userId")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userId")
+    @JsonIdentityReference(alwaysAsId = true)
     private User user;
 
     @Transient
@@ -38,7 +38,7 @@ public class JobRating {
 
     public void setRating(Setting setting) {
         rating += isFavorite ? setting.getPointsFavorite() : 0;
-        rating += liked ? setting.getPointsInterest() : setting.getPointsNoInterest();
+        rating += liked != null ? (liked ? setting.getPointsInterest() : setting.getPointsNoInterest()) : 0;
         rating += clicked ? setting.getPointsDetailsClick() : 0;
     }
 }
