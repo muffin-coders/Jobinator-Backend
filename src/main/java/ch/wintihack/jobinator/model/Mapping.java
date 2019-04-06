@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -30,7 +31,8 @@ public class Mapping {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mapping")
     private Set<MappingCondition> mappingConditions;
 
-    public boolean checkAllCondition(Object o) {
-        return true;
+    public boolean checkAllCondition(List<UserAnswer> userAnswers) {
+        return mappingConditions.stream()
+                .anyMatch(mapping -> mapping.fulfillsCondition(userAnswers));
     }
 }

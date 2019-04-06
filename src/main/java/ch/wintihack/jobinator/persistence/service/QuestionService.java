@@ -27,9 +27,11 @@ public class QuestionService {
     }
 
     public Question getNextQuestion(int userId, Integer currentQuestionId) throws Exception {
-        Integer questionInt = currentQuestionId != null ? currentQuestionId : 1;
-        Question question = getQuestionById(questionInt);
+        if (currentQuestionId == null || currentQuestionId == 0)
+            return getQuestionById(1);
 
+        Integer questionInt = currentQuestionId;
+        Question question = getQuestionById(questionInt);
         Optional<Question> nextQuestion = question.getBaseMappings()
                 .stream()
                 .filter(mapping -> mapping.getMappingConditions().size() == 0)
@@ -41,15 +43,20 @@ public class QuestionService {
             return nextQuestion.get();
         System.out.println("2");
 
-        return question.getBaseMappings()
+        List<UserAnswer> userAnswers = Lists.newArrayList(userAnswerRepository.findAll());
+        nextQuestion = question.getBaseMappings()
                 .stream()
                 .peek(v -> System.out.println("3"))
-                .filter(mapping -> mapping.checkAllCondition(null))
+                .filter(mapping -> mapping.checkAllCondition(userAnswers))
                 .peek(v -> System.out.println("4"))
                 .map(Mapping::getResultQuestion)
                 .peek(v -> System.out.println("5"))
-                .findAny()
-                .orElse(getQuestionById(2));
+                .findAny();
+                //.orElseThrow(Exception::new);
+        if (nextQuestion.isPresent())
+            return nextQuestion.get();
+
+        throw new Exception();
     }
 
     public Question getQuestionById(Integer id) throws Exception {

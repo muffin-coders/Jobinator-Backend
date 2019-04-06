@@ -38,4 +38,8 @@ public class UserAnswer {
         this.answer = answer;
         this.question = question;
     }
+
+    public UserAnswer() {
+        // used for hibernate
+    }
 }

@@ -3,6 +3,7 @@ package ch.wintihack.jobinator.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,4 +23,10 @@ public class MappingCondition {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mapping_id", nullable = false)
     private Mapping mapping;
+
+    public boolean fulfillsCondition(List<UserAnswer> userAnswers) {
+        return userAnswers.stream()
+                .anyMatch(userAnswer -> userAnswer.getQuestion().equals(question)
+                                && userAnswer.getAnswer().equals(answer));
+    }
 }
