@@ -16,6 +16,9 @@ public class QuestionService {
         return questionRepository.findAll();
     }
 
+    public Question getNextQuestion() {
+        return null;
+    }
 
     public Question getQuestionById(Integer id) throws Exception {
         return questionRepository.findById(id).orElseThrow(Exception::new);
