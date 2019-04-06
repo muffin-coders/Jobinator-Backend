@@ -27,9 +27,18 @@ public class JobRating {
     @JsonIdentityReference(alwaysAsId=true)
     private User user;
 
+    @Transient
+    private Integer rating = 0;
+
     private Boolean isFavorite;
 
     private Boolean liked;
 
     private Boolean clicked;
+
+    public void setRating(Setting setting) {
+        rating += isFavorite ? setting.getPointsFavorite() : 0;
+        rating += liked ? setting.getPointsInterest() : setting.getPointsNoInterest();
+        rating += clicked ? setting.getPointsDetailsClick() : 0;
+    }
 }

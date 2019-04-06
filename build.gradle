@@ -6,7 +6,6 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
     }
 }
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -20,6 +19,11 @@ bootJar {
 
 repositories {
     mavenCentral()
+}
+
+configurations {
+    all*.exclude module : 'slf4j-log4j12'
+    all*.exclude module : 'javax.servlet'
 }
 
 sourceCompatibility = 1.8
@@ -52,6 +56,13 @@ dependencies {// https://mvnrepository.com/artifact/org.springframework.boot/spr
 
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.0'
-
+// https://mvnrepository.com/artifact/org.apache.spark/spark-mllib
+    compile group: 'org.apache.spark', name: 'spark-mllib_2.10', version: '1.6.0'
+// https://mvnrepository.com/artifact/org.apache.spark/spark-sql
+    compile group: 'org.apache.spark', name: 'spark-sql_2.10', version: '1.6.1'
+// https://mvnrepository.com/artifact/org.apache.spark/spark-core
+    compile group: 'org.apache.spark', name: 'spark-core_2.10', version: '1.6.0'
+// https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j
+    compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.25'
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
