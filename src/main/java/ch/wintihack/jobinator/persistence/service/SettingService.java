@@ -19,7 +19,7 @@ public class SettingService {
 
     private Setting getFirstSetting() {
         List<Setting> myList = Lists.newArrayList(settingRepository.findAll());
-        currentSetting = myList.get (1);
+        currentSetting = myList.get(0);
         return currentSetting;
     }
 

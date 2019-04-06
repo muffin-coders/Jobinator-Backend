@@ -33,6 +33,6 @@ public class JobController {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/{userId}/user/previews")
     public List<JobPreview> getJobPreviews(@PathVariable(value = "userId") Integer userId) throws Exception {
         User user = userService.getUserById(userId);
-        return jobService.getOverLowerBound(user).stream().map(JobRating::getJobPreview).collect(Collectors.toList());
+        return jobService.getOverLowerBound(user).stream().collect(Collectors.toList());
     }
 }

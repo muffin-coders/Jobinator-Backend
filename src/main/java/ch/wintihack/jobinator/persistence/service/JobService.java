@@ -44,14 +44,14 @@ public class JobService {
         return Lists.newArrayList(jobRatingRepository.findAll()).stream().peek(jR -> jR.setRating(setting)).collect(Collectors.toList());
     }
 
-    public List<JobRating> getOverLowerBound(User user) {
+    public List<JobPreview> getOverLowerBound(User user) {
         Double lowerBound = settingService.getSetting().getLowerBoundAIPoints();
-        List<JobRating> jobRatings = Lists.newArrayList(jobRatingRepository.findAll());
+        List<JobPreview> jobRatings = Lists.newArrayList(jobPreviewRepository.findAll());
         if (recommendationService.isModelReady())
-            return Lists.newArrayList(jobRatingRepository.findAll())
+            return Lists.newArrayList(jobPreviewRepository.findAll())
                     .stream()
-                    .filter(jR -> {
-                        Double p = recommendationService.getPrediction(user.getUserId(), jR.getJobPreview().getJobPreviewId());
+                    .filter(jP -> {
+                        Double p = recommendationService.getPrediction(user.getUserId(), jP.getJobPreviewId());
                         return p >= lowerBound || p == 0;
                     })
                     .collect(Collectors.toList());

@@ -1,7 +1,10 @@
 package ch.wintihack.jobinator.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,6 +23,8 @@ public class JobPreview {
     private String jobText;
 
     @OneToOne
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="jobDetailId")
     private JobDetail jobDetail;
 
     @JsonIgnore

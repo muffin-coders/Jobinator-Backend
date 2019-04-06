@@ -10,7 +10,7 @@ public class JobDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer jobPreviewId;
+    private Integer jobDetailId;
 
     private String jobTitle;
 
