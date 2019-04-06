@@ -49,8 +49,9 @@ public class QuestionService {
                 //.orElseThrow(Exception::new);
         if (nextQuestion.isPresent())
             return nextQuestion.get();
-
-        throw new Exception();
+        Question lastQuestion = new Question();
+        lastQuestion.setQuestion("Alle Fragen wurden geklärt.");
+        return lastQuestion;
     }
 
     public Question getQuestionById(Integer id) throws Exception {
