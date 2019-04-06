@@ -64,6 +64,9 @@ dependencies {// https://mvnrepository.com/artifact/org.springframework.boot/spr
     compile group: 'org.apache.spark', name: 'spark-core_2.10', version: '1.6.0'
 // https://mvnrepository.com/artifact/org.slf4j/log4j-over-slf4j
     compile group: 'org.slf4j', name: 'log4j-over-slf4j', version: '1.7.25'
+    compile 'com.google.cloud:google-cloud-language:1.49.0'
+    compile 'com.google.cloud:google-cloud-storage:1.49.0'
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
     // jsoup HTML parser library @ https://jsoup.org/
     compile 'org.jsoup:jsoup:1.11.3'

@@ -18,4 +18,10 @@ public class Progress {
     private Integer currentAmountJobs;
 
     private Integer maxAmountJobs;
+
+    private Integer currentLimit;
+
+    public void decreaseLimit() {
+        currentLimit = ((Double)(currentLimit * 0.6)).intValue();
+    }
 }
