@@ -34,13 +34,15 @@ public class QuestionService {
     public Question getNextQuestion(int user_id) throws Exception {
         Question currentQuestion = currentQuestions.get(user_id);
         if (currentQuestion == null) {
-            return getQuestionById(1);
+            Question question = getQuestionById(1);
+            currentQuestions.put(user_id, question);
+            return question;
         }
 
         List<Mapping> mappings = Lists.newArrayList(mappingRepository.findAll());
         List<UserAnswer> userAnswers = Lists.newArrayList(userAnswerRepository.findAll());
         for (Mapping mapping : mappings) {
-            if (mapping.getBaseQuestion().getQuestionId().equals(currentQuestion.getQuestionId())) {
+            if (mapping.getBaseQuestion().equals(currentQuestion)) {
                 Set<MappingCondition> mappingConditions = mapping.getMappingConditions();
                 if (mappingConditions.isEmpty()) {
                     currentQuestions.put(user_id, mapping.getResultQuestion());
