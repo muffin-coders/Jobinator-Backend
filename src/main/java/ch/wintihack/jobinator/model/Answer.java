@@ -32,4 +32,8 @@ public class Answer {
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "answer")
     private Set<MappingCondition> mappingConditions;
+
+    public boolean equals(Answer answer) {
+        return answerId.equals(answer.answerId);
+    }
 }
