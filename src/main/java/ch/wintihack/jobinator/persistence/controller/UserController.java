@@ -33,10 +33,8 @@ public class UserController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/{userId}/questions")
-    public Question getNextQuestion(@PathVariable(value = "userId") Integer userId) {
-        List<Question> myList = Lists.newArrayList(questionService.getAllObjects());
-        Collections.shuffle(myList);
-        return myList.get(0);
+    public Question getNextQuestion(@PathVariable(value = "userId") Integer userId) throws Exception {
+        return questionService.getNextQuestion(userId);
     }
 
     @CrossOrigin
