@@ -15,6 +15,10 @@ public class UserService {
         return userRepository.save(new User());
     }
 
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
     public User getUserById(Integer id) throws Exception {
         return userRepository.findById(id).orElseThrow(Exception::new);
     }
