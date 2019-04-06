@@ -1,6 +1,7 @@
 package ch.wintihack.jobinator.model;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,7 +19,7 @@ public class Answer {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 

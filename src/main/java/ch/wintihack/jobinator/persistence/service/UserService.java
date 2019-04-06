@@ -1,6 +1,5 @@
 package ch.wintihack.jobinator.persistence.service;
 
-import ch.wintihack.jobinator.model.Answer;
 import ch.wintihack.jobinator.model.User;
 import ch.wintihack.jobinator.persistence.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

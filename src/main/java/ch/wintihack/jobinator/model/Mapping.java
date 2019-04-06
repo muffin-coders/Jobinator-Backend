@@ -16,12 +16,12 @@ public class Mapping {
     private Integer mappingId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "base_question_id", nullable = false)
     private Question baseQuestion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityReference(alwaysAsId = true)
     @JoinColumn(name = "result_question_id", nullable = false)
     private Question resultQuestion;
 

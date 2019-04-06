@@ -1,8 +1,13 @@
 package ch.wintihack.jobinator.persistence.controller;
 
-import ch.wintihack.jobinator.model.*;
-import ch.wintihack.jobinator.persistence.repository.FavoriteRepository;
-import ch.wintihack.jobinator.persistence.service.*;
+import ch.wintihack.jobinator.model.Favorite;
+import ch.wintihack.jobinator.model.JobDetail;
+import ch.wintihack.jobinator.model.JobPreview;
+import ch.wintihack.jobinator.model.User;
+import ch.wintihack.jobinator.persistence.service.FavoriteService;
+import ch.wintihack.jobinator.persistence.service.JobRatingService;
+import ch.wintihack.jobinator.persistence.service.JobService;
+import ch.wintihack.jobinator.persistence.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +35,7 @@ public class JobController {
     public JobPreview getJobPreviewById(@PathVariable(value = "jobPreviewId") Integer jobPreviewId) throws Exception {
         return jobService.getJobPreviewById(jobPreviewId);
     }
+
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/{jobDetailId}")
     public JobDetail getJobDetailById(@PathVariable(value = "jobDetailId") Integer jobDetailId) throws Exception {
@@ -45,27 +51,27 @@ public class JobController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = "/{userId}/users/previews/{previewId}/like")
-    public void likeJob(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "previewId") Integer previewId) throws Exception {
+    public void likeJob(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "previewId") Integer previewId) throws Exception {
         User user = userService.getUserById(userId);
         JobPreview jobPreview = jobService.getJobPreviewById(previewId);
-        jobRatingService.addLike(jobPreview,user);
+        jobRatingService.addLike(jobPreview, user);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = "/{userId}/users/previews/{previewId}/dislike")
-    public void dislikeJob(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "previewId") Integer previewId) throws Exception {
+    public void dislikeJob(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "previewId") Integer previewId) throws Exception {
         User user = userService.getUserById(userId);
         JobPreview jobPreview = jobService.getJobPreviewById(previewId);
-        jobRatingService.addDislikeLike(jobPreview,user);
+        jobRatingService.addDislikeLike(jobPreview, user);
     }
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = "/{userId}/users/previews/{previewId}/favorite")
-    public void favoriteJob(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "previewId") Integer previewId) throws Exception {
+    public void favoriteJob(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "previewId") Integer previewId) throws Exception {
         User user = userService.getUserById(userId);
         JobPreview jobPreview = jobService.getJobPreviewById(previewId);
-        favoriteService.saveFavorite(new Favorite(user,jobPreview));
-        jobRatingService.addFavorite(jobPreview,user);
+        favoriteService.saveFavorite(new Favorite(user, jobPreview));
+        jobRatingService.addFavorite(jobPreview, user);
     }
 
 
@@ -78,10 +84,10 @@ public class JobController {
 
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = "/{userId}/users/previews/{previewId}/detail")
-    public JobDetail clickJob(@PathVariable(value = "userId") Integer userId,@PathVariable(value = "previewId") Integer previewId) throws Exception {
+    public JobDetail clickJob(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "previewId") Integer previewId) throws Exception {
         User user = userService.getUserById(userId);
         JobPreview jobPreview = jobService.getJobPreviewById(previewId);
-        jobRatingService.addClick(jobPreview,user);
+        jobRatingService.addClick(jobPreview, user);
         return jobPreview.getJobDetail();
     }
 }

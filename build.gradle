@@ -22,8 +22,8 @@ repositories {
 }
 
 configurations {
-    all*.exclude module : 'slf4j-log4j12'
-    all*.exclude module : 'javax.servlet'
+    all*.exclude module: 'slf4j-log4j12'
+    all*.exclude module: 'javax.servlet'
 }
 
 sourceCompatibility = 1.8

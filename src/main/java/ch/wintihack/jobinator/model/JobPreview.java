@@ -23,8 +23,8 @@ public class JobPreview {
     private String jobText;
 
     @OneToOne
-    @JsonIdentityReference(alwaysAsId=true)
-    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="jobDetailId")
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "jobDetailId")
     private JobDetail jobDetail;
 
     @JsonIgnore
