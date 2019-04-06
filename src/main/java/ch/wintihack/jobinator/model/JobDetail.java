@@ -19,6 +19,8 @@ public class JobDetail {
 
     private String url;
 
+    private String location;
+
     private String tele;
 
     @OneToOne(cascade = CascadeType.ALL)

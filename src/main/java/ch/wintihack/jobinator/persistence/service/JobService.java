@@ -36,6 +36,10 @@ public class JobService {
         return jobDetailRepository.findById(id).orElseThrow(Exception::new);
     }
 
+    public JobDetail save(JobDetail job) {
+        return jobDetailRepository.save(job);
+    }
+
     public List<InputRating> getInputRatings() {
         return getAllJobRatings().stream()
                 .map(jR -> new InputRating(jR.getUser().getUserId(), jR.getJobPreview().getJobPreviewId(), jR.getRating()))
