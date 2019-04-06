@@ -49,6 +49,14 @@ public class JobController {
         return jobService.getOverLowerBound(user).stream().collect(Collectors.toList());
     }
 
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/users/{userId}/previews/next")
+    public JobPreview getNextPreview(@PathVariable(value = "userId") Integer userId) throws Exception {
+        User user = userService.getUserById(userId);
+        return jobService.getOverLowerBound(user).stream().findFirst().orElse(null);
+    }
+
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", path = "/{userId}/users/previews/{previewId}/like")
     public void likeJob(@PathVariable(value = "userId") Integer userId, @PathVariable(value = "previewId") Integer previewId) throws Exception {

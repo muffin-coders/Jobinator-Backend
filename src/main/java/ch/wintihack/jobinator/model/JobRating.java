@@ -37,8 +37,8 @@ public class JobRating {
     private Boolean clicked;
 
     public void setRating(Setting setting) {
-        rating += isFavorite ? setting.getPointsFavorite() : 0;
+        rating += (isFavorite != null && isFavorite) ? setting.getPointsFavorite() : 0;
         rating += liked != null ? (liked ? setting.getPointsInterest() : setting.getPointsNoInterest()) : 0;
-        rating += clicked ? setting.getPointsDetailsClick() : 0;
+        rating += (clicked != null && clicked) ? setting.getPointsDetailsClick() : 0;
     }
 }
