@@ -30,7 +30,7 @@ public class JobPreview {
     @Transient
     private Integer score;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "jobDetailId")

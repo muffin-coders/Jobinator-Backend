@@ -21,7 +21,7 @@ public class JobDetail {
 
     private String tele;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     private JobPreview jobPreview;
 }
