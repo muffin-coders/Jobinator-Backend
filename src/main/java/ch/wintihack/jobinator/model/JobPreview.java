@@ -45,4 +45,9 @@ public class JobPreview {
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "jobPreview")
     private Set<Favorite> favorites;
+
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "jobPreview")
+    private Set<Categorie> categories;
 }

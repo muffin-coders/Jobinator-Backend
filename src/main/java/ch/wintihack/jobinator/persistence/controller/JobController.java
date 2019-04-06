@@ -4,10 +4,7 @@ import ch.wintihack.jobinator.model.Favorite;
 import ch.wintihack.jobinator.model.JobDetail;
 import ch.wintihack.jobinator.model.JobPreview;
 import ch.wintihack.jobinator.model.User;
-import ch.wintihack.jobinator.persistence.service.FavoriteService;
-import ch.wintihack.jobinator.persistence.service.JobRatingService;
-import ch.wintihack.jobinator.persistence.service.JobService;
-import ch.wintihack.jobinator.persistence.service.UserService;
+import ch.wintihack.jobinator.persistence.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
