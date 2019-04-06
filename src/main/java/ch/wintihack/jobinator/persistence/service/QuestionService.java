@@ -8,10 +8,7 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class QuestionService {
@@ -30,35 +27,29 @@ public class QuestionService {
     }
 
     public Question getNextQuestion(int userId, Integer currentQuestionId) throws Exception {
-        //Integer currentQuestionId = currentQuestions.get(user_id);
-        if (currentQuestionId == null) {
-            Question question = getQuestionById(1);
-            //currentQuestions.put(user_id, question.getQuestionId());
-            return question;
-        }
+        Integer questionInt = currentQuestionId != null ? currentQuestionId : 1;
+        Question question = getQuestionById(questionInt);
 
-        List<Mapping> mappings = Lists.newArrayList(mappingRepository.findAll());
-        List<UserAnswer> userAnswers = Lists.newArrayList(userAnswerRepository.findAll());
-        for (Mapping mapping : mappings) {
-            if (mapping.getBaseQuestion().getQuestionId().equals(currentQuestionId)) {
-                Set<MappingCondition> mappingConditions = mapping.getMappingConditions();
-                if (mappingConditions.isEmpty()) {
-                    //currentQuestions.put(user_id, mapping.getResultQuestion().getQuestionId());
-                    return mapping.getResultQuestion();
-                }
-                for (MappingCondition condition : mappingConditions) {
-                    for (UserAnswer userAnswer : userAnswers) {
-                        if (userAnswer.getUser().getUserId() == userId
-                                && userAnswer.getQuestion().equals(condition.getQuestion())
-                                && userAnswer.getAnswer().equals(condition.getAnswer())) {
-                            //currentQuestions.put(user_id, mapping.getResultQuestion().getQuestionId());
-                            return mapping.getResultQuestion();
-                        }
-                    }
-                }
-            }
-        }
-        return null;
+        Optional<Question> nextQuestion = question.getBaseMappings()
+                .stream()
+                .filter(mapping -> mapping.getMappingConditions().size() == 0)
+                .map(Mapping::getResultQuestion)
+                .findAny();
+        System.out.println(currentQuestionId);
+        System.out.println("1");
+        if(nextQuestion.isPresent())
+            return nextQuestion.get();
+        System.out.println("2");
+
+        return question.getBaseMappings()
+                .stream()
+                .peek(v -> System.out.println("3"))
+                .filter(mapping -> mapping.checkAllCondition(null))
+                .peek(v -> System.out.println("4"))
+                .map(Mapping::getResultQuestion)
+                .peek(v -> System.out.println("5"))
+                .findAny()
+                .orElse(getQuestionById(2));
     }
 
     public Question getQuestionById(Integer id) throws Exception {

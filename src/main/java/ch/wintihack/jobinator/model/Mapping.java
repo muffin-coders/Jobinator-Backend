@@ -29,4 +29,8 @@ public class Mapping {
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "mapping")
     private Set<MappingCondition> mappingConditions;
+
+    public boolean checkAllCondition(Object o) {
+        return true;
+    }
 }
