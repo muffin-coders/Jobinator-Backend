@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("users")
@@ -34,7 +36,11 @@ public class UserController {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/{userId}/questions")
     public Question getNextQuestion(@PathVariable(value = "userId") Integer userId) throws Exception {
-        return questionService.getNextQuestion(userId);
+        User user = userService.getUserById(userId);
+        Question question = questionService.getNextQuestion(userId, user.getCurrentQuestionId());
+        user.setCurrentQuestionId(question.getQuestionId());
+        userService.save(user);
+        return question;
     }
 
     @CrossOrigin

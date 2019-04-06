@@ -25,35 +25,33 @@ public class QuestionService {
     @Autowired
     private UserAnswerRepository userAnswerRepository;
 
-    private Map<Integer, Question> currentQuestions = new HashMap<Integer, Question>();
-
     public Iterable<Question> getAllObjects() {
         return questionRepository.findAll();
     }
 
-    public Question getNextQuestion(int user_id) throws Exception {
-        Question currentQuestion = currentQuestions.get(user_id);
-        if (currentQuestion == null) {
+    public Question getNextQuestion(int userId, Integer currentQuestionId) throws Exception {
+        //Integer currentQuestionId = currentQuestions.get(user_id);
+        if (currentQuestionId == null) {
             Question question = getQuestionById(1);
-            currentQuestions.put(user_id, question);
+            //currentQuestions.put(user_id, question.getQuestionId());
             return question;
         }
 
         List<Mapping> mappings = Lists.newArrayList(mappingRepository.findAll());
         List<UserAnswer> userAnswers = Lists.newArrayList(userAnswerRepository.findAll());
         for (Mapping mapping : mappings) {
-            if (mapping.getBaseQuestion().equals(currentQuestion)) {
+            if (mapping.getBaseQuestion().getQuestionId().equals(currentQuestionId)) {
                 Set<MappingCondition> mappingConditions = mapping.getMappingConditions();
                 if (mappingConditions.isEmpty()) {
-                    currentQuestions.put(user_id, mapping.getResultQuestion());
+                    //currentQuestions.put(user_id, mapping.getResultQuestion().getQuestionId());
                     return mapping.getResultQuestion();
                 }
                 for (MappingCondition condition : mappingConditions) {
                     for (UserAnswer userAnswer : userAnswers) {
-                        if (userAnswer.getUser().getUserId() == user_id
+                        if (userAnswer.getUser().getUserId() == userId
                                 && userAnswer.getQuestion().equals(condition.getQuestion())
                                 && userAnswer.getAnswer().equals(condition.getAnswer())) {
-                            currentQuestions.put(user_id, mapping.getResultQuestion());
+                            //currentQuestions.put(user_id, mapping.getResultQuestion().getQuestionId());
                             return mapping.getResultQuestion();
                         }
                     }
