@@ -17,6 +17,7 @@ public class UserService {
     public User createNewUser() {
         User user = new User();
         user.getProgress().setMaxAmountJobs(jobService.getJobList(user,9999).size());
+        user.getProgress().setCurrentLimit(user.getProgress().getMaxAmountJobs());
         user.getProgress().setCurrentAmountJobs(user.getProgress().getMaxAmountJobs());
         return userRepository.save(user);
     }

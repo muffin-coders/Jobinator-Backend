@@ -93,7 +93,7 @@ public class JobController {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/{userId}/users/previews")
     public List<JobPreview> getJobPreviews(@PathVariable(value = "userId") Integer userId) throws Exception {
         User user = userService.getUserById(userId);
-        return jobService.getJobList(user, 9999);
+        return jobService.getJobList(user, user.getProgress().getCurrentLimit());
     }
 
 
@@ -101,12 +101,12 @@ public class JobController {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/users/{userId}/previews/next")
     public List<JobPreview> getNextPreview(@PathVariable(value = "userId") Integer userId) throws Exception {
         User user = userService.getUserById(userId);
-        List<JobPreview> jobPreviews = jobService.getJobList(user, 9999);
-        return jobService.getJobList(user, 9999).stream().peek(v -> v.setIsLast(jobPreviews.size() == 1)).limit(1).collect(Collectors.toList());
+        List<JobPreview> jobPreviews = jobService.getJobList(user, user.getProgress().getCurrentLimit());
+        return jobService.getJobList(user, user.getProgress().getCurrentLimit()).stream().peek(v -> v.setIsLast(jobPreviews.size() == 1)).limit(1).collect(Collectors.toList());
     }
 
     private void updateUserProgress(User user) {
-        user.getProgress().setCurrentAmountJobs(jobService.getJobList(user, 9999).size());
+        user.getProgress().setCurrentAmountJobs(jobService.getJobList(user, user.getProgress().getCurrentLimit()).size());
     }
 
 }
