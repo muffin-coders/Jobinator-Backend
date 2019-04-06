@@ -32,10 +32,10 @@ public class JobRatingService {
         jobRatingRepository.save(jobRating);
     }
 
-    public void addLike(JobPreview jobPreview, User user) {
+    public JobRating addLike(JobPreview jobPreview, User user) {
         JobRating jobRating = getJobRating(jobPreview, user);
         jobRating.setLiked(true);
-        jobRatingRepository.save(jobRating);
+        return jobRatingRepository.save(jobRating);
     }
 
     public void addDislikeLike(JobPreview jobPreview, User user) {

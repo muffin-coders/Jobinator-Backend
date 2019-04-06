@@ -22,7 +22,16 @@ public class JobPreview {
 
     private String jobText;
 
+    private String image;
+
+    @Transient
+    private Boolean isLast = Boolean.FALSE;
+
+    @Transient
+    private Integer score;
+
     @OneToOne
+    @EqualsAndHashCode.Exclude
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "jobDetailId")
     private JobDetail jobDetail;

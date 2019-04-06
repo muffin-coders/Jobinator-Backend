@@ -1,6 +1,7 @@
 package ch.wintihack.jobinator.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
@@ -21,5 +22,6 @@ public class JobDetail {
     private String tele;
 
     @OneToOne
+    @EqualsAndHashCode.Exclude
     private JobPreview jobPreview;
 }

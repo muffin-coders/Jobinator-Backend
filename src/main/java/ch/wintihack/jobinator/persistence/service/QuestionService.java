@@ -37,20 +37,14 @@ public class QuestionService {
                 .filter(mapping -> mapping.getMappingConditions().size() == 0)
                 .map(Mapping::getResultQuestion)
                 .findAny();
-        System.out.println(currentQuestionId);
-        System.out.println("1");
         if(nextQuestion.isPresent())
             return nextQuestion.get();
-        System.out.println("2");
 
         List<UserAnswer> userAnswers = Lists.newArrayList(userAnswerRepository.findAll());
         nextQuestion = question.getBaseMappings()
                 .stream()
-                .peek(v -> System.out.println("3"))
                 .filter(mapping -> mapping.checkAllCondition(userAnswers))
-                .peek(v -> System.out.println("4"))
                 .map(Mapping::getResultQuestion)
-                .peek(v -> System.out.println("5"))
                 .findAny();
                 //.orElseThrow(Exception::new);
         if (nextQuestion.isPresent())

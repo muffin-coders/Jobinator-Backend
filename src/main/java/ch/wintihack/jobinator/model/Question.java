@@ -16,7 +16,6 @@ public class Question {
 
     private String question;
 
-    @JsonIgnore
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "question")
     private Set<Answer> answers;
@@ -44,4 +43,8 @@ public class Question {
     public boolean equals(Question question) {
         return questionId.equals(question.questionId);
     }
+
+    private QuestionType questionTye;
+
+
 }
