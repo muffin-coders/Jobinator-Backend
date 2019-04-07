@@ -61,8 +61,6 @@ public class JobPreview {
                 ", isLast=" + isLast +
                 ", score=" + score +
                 ", jobDetail=" + jobDetail +
-                ", favorites=" + favorites +
-                ", categories=" + categories +
                 '}';
     }
 }

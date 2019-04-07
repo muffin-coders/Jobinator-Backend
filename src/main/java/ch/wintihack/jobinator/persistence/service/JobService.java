@@ -65,7 +65,7 @@ public class JobService {
                 .limit(limit)
                 .peek(jobPreview ->
                         jobPreview.setImage(jobPreview.getImage() == null
-                                ? "http://pandermatt.ch/Jobinator-Website/assets/icon.png"
+                                ? "https://images.pexels.com/photos/327540/pexels-photo-327540.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
                                 : jobPreview.getImage()))
                 .collect(Collectors.toList());
     }

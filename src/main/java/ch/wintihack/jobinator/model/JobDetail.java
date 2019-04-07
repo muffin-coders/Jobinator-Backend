@@ -26,4 +26,16 @@ public class JobDetail {
     @OneToOne(cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude
     private JobPreview jobPreview;
+
+    @Override
+    public String toString() {
+        return "JobDetail{" +
+                "jobDetailId=" + jobDetailId +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", jobText='" + jobText + '\'' +
+                ", url='" + url + '\'' +
+                ", location='" + location + '\'' +
+                ", tele='" + tele + '\'' +
+                '}';
+    }
 }
