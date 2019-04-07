@@ -112,7 +112,7 @@ public class RecommendationMlModel {
 
     private void trainModel(Collection<InputRating> ratings) {
         JavaRDD<Rating> ratingRDD = rddHelper.getRddFromCollection(createSparkRating(ratings)).cache();
-        if (ratingRDD.isEmpty())
+        if (ratingRDD == null || ratingRDD.isEmpty())
             return;
         mutex.writeLock().lock();
         model = als.setRank(10).setIterations(10).run(ratingRDD);

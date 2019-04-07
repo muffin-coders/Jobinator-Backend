@@ -50,11 +50,15 @@ public class QuestionService {
         if (nextQuestion.isPresent())
             return nextQuestion.get();
         Question lastQuestion = new Question();
+        lastQuestion.setQuestionId(-1);
         lastQuestion.setQuestion("Alle Fragen wurden geklärt.");
         return lastQuestion;
     }
 
-    public Question getQuestionById(Integer id) throws Exception {
-        return questionRepository.findById(id).orElseThrow(Exception::new);
+    public Question getQuestionById(Integer id) {
+        Question lastQuestion = new Question();
+        lastQuestion.setQuestionId(-1);
+        lastQuestion.setQuestion("Alle Fragen wurden geklärt.");
+        return questionRepository.findById(id).orElse(lastQuestion);
     }
 }
