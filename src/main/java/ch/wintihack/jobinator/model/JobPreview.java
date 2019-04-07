@@ -50,4 +50,19 @@ public class JobPreview {
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "jobPreview")
     private Set<Categorie> categories;
+
+    @Override
+    public String toString() {
+        return "JobPreview{" +
+                "jobPreviewId=" + jobPreviewId +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", jobText='" + jobText + '\'' +
+                ", image='" + image + '\'' +
+                ", isLast=" + isLast +
+                ", score=" + score +
+                ", jobDetail=" + jobDetail +
+                ", favorites=" + favorites +
+                ", categories=" + categories +
+                '}';
+    }
 }

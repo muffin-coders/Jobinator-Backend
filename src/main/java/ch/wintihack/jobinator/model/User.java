@@ -35,5 +35,4 @@ public class User {
 
     private Integer currentQuestionId;
 
-
 }

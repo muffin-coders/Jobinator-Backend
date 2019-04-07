@@ -58,8 +58,7 @@ public class JobService {
     public List<JobPreview> getJobList(User user, Integer limit) {
         List<JobPreview> jobRatings = Lists.newArrayList(jobPreviewRepository.findAll());
         List<JobPreview> alreadySeen = user.getJobRatings().stream().map(JobRating::getJobPreview).collect(Collectors.toList());
-        List<JobPreview> filteredByCat = categoryQuestionService.filterByCat(user,alreadySeen);
-        jobRatings = filterByAlreadySeen(jobRatings.stream(), filteredByCat).collect(Collectors.toList());
+        jobRatings = filterByAlreadySeen(jobRatings.stream(), alreadySeen).collect(Collectors.toList());
         return jobRatings.stream()
                 .peek(jobPreview -> jobPreview.setScore(scoreService.getScore(user, jobPreview)))
                 .sorted(Comparator.comparing(JobPreview::getScore))
