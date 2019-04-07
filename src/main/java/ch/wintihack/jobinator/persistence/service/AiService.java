@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class AiService {
@@ -21,8 +22,10 @@ public class AiService {
 
     public Optional<Integer> getScore(User user, JobPreview jobPreview) {
         Setting setting = settingService.getSetting();
+        if (new Random().nextInt(100) != 1)
+            return Optional.of(0);
         if (recommendationService == null) {
-            recommendationService = new RecommendationService(() -> jobService.getInputRatings(), 10, 1);
+            recommendationService = new RecommendationService(() -> jobService.getInputRatings(), 30, 1);
             return Optional.empty();
         }
         if (!recommendationService.isModelReady())
