@@ -64,6 +64,10 @@ public class JobService {
                 .peek(jobPreview -> jobPreview.setScore(scoreService.getScore(user, jobPreview)))
                 .sorted(Comparator.comparing(JobPreview::getScore))
                 .limit(limit)
+                .peek(jobPreview ->
+                        jobPreview.setImage(jobPreview.getImage() == null
+                                ? "http://pandermatt.ch/Jobinator-Website/assets/icon.png"
+                                : jobPreview.getImage()))
                 .collect(Collectors.toList());
     }
 

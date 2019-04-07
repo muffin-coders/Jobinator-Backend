@@ -47,7 +47,9 @@ public class UserController {
         User user = userService.getUserById(idUser);
         UserAnswer userAnswer = new UserAnswer(user, answer, question);
         userAnswerService.createNewUserAnswer(userAnswer);
+        user.getProgress().decreaseLimit();
         user.getProgress().setCurrentAmountJobs(jobService.getJobList(user, user.getProgress().getCurrentLimit()).size());
+        userService.save(user);
         return user.getProgress();
     }
 }

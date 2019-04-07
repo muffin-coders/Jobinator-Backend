@@ -103,7 +103,9 @@ public class JobController {
     }
 
     private void updateUserProgress(User user) {
+        user.getProgress().decreaseLimit();
         user.getProgress().setCurrentAmountJobs(jobService.getJobList(user, user.getProgress().getCurrentLimit()).size());
+        userService.save(user);
     }
 
 }

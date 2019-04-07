@@ -22,10 +22,8 @@ public class AiService {
 
     public Optional<Integer> getScore(User user, JobPreview jobPreview) {
         Setting setting = settingService.getSetting();
-        if (new Random().nextInt(100) != 1)
-            return Optional.of(0);
         if (recommendationService == null) {
-            recommendationService = new RecommendationService(() -> jobService.getInputRatings(), 30, 1);
+            recommendationService = new RecommendationService(() -> jobService.getInputRatings(), 10000, 10000);
             return Optional.empty();
         }
         if (!recommendationService.isModelReady())

@@ -56,7 +56,7 @@ public class TranslationController {
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/answers/{answer}/{lang}")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json", path = "/answers/{answerId}/{lang}")
     public Answer translateAnswer(@PathVariable(value = "lang") String lang, @PathVariable(value = "answerId") Integer answerId) throws Exception {
         Answer answer = answerRepository.findById(answerId).orElseThrow(Exception::new);
         TranslationService translationService = new TranslationService();
