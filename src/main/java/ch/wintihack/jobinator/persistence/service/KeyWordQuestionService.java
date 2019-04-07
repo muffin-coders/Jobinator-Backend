@@ -16,7 +16,7 @@ public class KeyWordQuestionService {
     public Optional<Integer> getScore(User user, JobPreview jobPreview) {
         List<String> keywords = new ArrayList<>();
         for (UserAnswer userAnswer : user.getUserAnswers()) {
-            if (QuestionType.KeyWordQuestion.equals(userAnswer.getQuestion().getQuestionTye())) {
+            if (QuestionType.KeyWordQuestion.equals(userAnswer.getQuestion().getQuestionType())) {
                 Answer answer = userAnswer.getAnswer();
                 String answerText = answer.getAnswerText();
                 keywords.add(answerText);

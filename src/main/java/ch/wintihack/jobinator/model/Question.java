@@ -44,7 +44,6 @@ public class Question {
         return questionId.equals(question.questionId);
     }
 
-    private QuestionType questionTye;
-
+    private QuestionType questionType;
 
 }
